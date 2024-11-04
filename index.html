@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Git Dorker</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta content='mijan' name='author'/>
+	<link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg">
+	<script type="text/javascript">
+		function getKeywordss(){
+		    $.get($('#urla').val(), function(resp) {
+			    document.getElementById('keywords1').value = resp;
+			});
+		}
+
+		function Generate(){
+			$("#results").empty();
+			$.each($('#keywords1').val().split('\n'), function(){
+			  var link = "https://github.com/search?q="+$('#targets').val()+" "+this+"&type=Code";
+			  $('#results').append("<tr><td><input type=\"checkbox\"></td><td> <a href=\""+encodeURI(link)+"\" target=\"_blank\">"+this+"</td></tr>");
+			});
+		}
+	</script>
+	<script src="./assets/jquery-2.1.3.min.js"></script>
+	<link rel="stylesheet" href="./assets/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12 text-center">
+			<h1>GitHub Advance Recon Engine</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6">
+			<div class="input-group mb-3">
+				<label class="input-group-text">Payloads link</label> 
+				<input type="text"  id="urla" class="form-control" placeholder="Enter your payloads link" value="https://raw.githubusercontent.com/freelancermijan/githubreconengine/refs/heads/main/git-dorks.txt">
+				<button class="btn btn-danger" onclick="getKeywordss()">Get Lists</button>
+			</div>
+			<div class="form-floating">
+				<textarea class="form-control" placeholder="Leave a comment here" id="keywords1" style="height: 400px"></textarea>
+				<label for="floatingTextarea2">Enter your custom payloads by every new line</label>
+			  </div>
+		</div>
+		<div class="col-6">
+			<div class="input-group mb-3">
+				<span class="input-group-text">Target</span> 
+				<input type="text" id="targets" value='"vulnweb.com" OR org:vulnweb.com' class="form-control" placeholder='"vulnweb.com" OR org:vulnweb.com'>
+				<button class="btn btn-danger input-group-text" onclick="Generate()">Generate links</button>
+			</div>
+			<table>
+				<div id="results" style="height:400px;overflow:scroll;"></div>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12">
+            <p class=""> Developed by <a href="https://x.com/mijanhaque_" target="_blank">Mijanur Rahman</a> </p>
+        </div>
+    </div>
+</div>
+	<script src="./assets/bootstrap.bundle.min.js"></script>
+</body>
+</html>
